@@ -54,12 +54,14 @@ const treeApp = {
     this.elements.errorMessage.hidden = true;
   },
   loadConfig() {
-    if (!this.apiUrl) {
-      this.showError('API URLが設定されていません。管理画面で設定してください。');
-      return;
-    }
-    this.showLoading();
-    fetch(`${this.apiUrl}?action=getConfig`)
+  if (!this.apiUrl) {
+    this.showError('API URLが設定されていません。管理画面で設定してください。');
+    // ここでローディングを解除し、画面操作を可能にする
+    this.hideLoading();
+    return;
+  }
+  this.showLoading();
+  fetch(`${this.apiUrl}?action=getConfig`)
       .then(response => response.json())
       .then(data => {
         this.config = data;
@@ -68,11 +70,12 @@ const treeApp = {
         this.hideLoading();
       })
       .catch(err => {
-        console.error(err);
-        this.showError('設定情報の取得に失敗しました。');
-        this.hideLoading();
-      });
-  },
+      console.error(err);
+      this.showError('設定情報の取得に失敗しました。');
+      // エラー時にも必ずローディングを解除
+      this.hideLoading();
+    });
+}
   fetchData() {
     if (!this.apiUrl) return;
     fetch(`${this.apiUrl}?action=getData`)
