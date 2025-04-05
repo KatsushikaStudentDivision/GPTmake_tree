@@ -4,6 +4,11 @@
   バニラJavaScript (ES6+) を利用。  
   ※API URLはローカルストレージから取得（セキュリティリスク N-03 参照）。
 */
+// localStorage に "treeAppApiUrl" が未設定の場合、テスト用ダミーURLをセットする
+if (!localStorage.getItem('treeAppApiUrl')) {
+  localStorage.setItem('treeAppApiUrl', 'https://script.google.com/macros/s/AKfycbxRpPzgPCSeSY4C5BNgbcrDyt7KTy-P0Q_1cVUyhoLw_cucnzrLopJfycTV8Y0MWNf7HA/exec');
+}
+
 const treeApp = {
   apiUrl: localStorage.getItem('treeAppApiUrl') || '',
   pollingInterval: 30000, // 初期値30秒（F-04, A-17）
