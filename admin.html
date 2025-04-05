@@ -1,0 +1,148 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理画面 - みんなで育てる友情の木</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div id="admin-container">
+    <!-- A-01: サイドナビゲーション -->
+    <nav id="side-nav" aria-label="管理画面メニュー">
+      <ul>
+        <li><button class="nav-btn" data-target="basic-settings">基本設定</button></li>
+        <li><button class="nav-btn" data-target="growth-settings">成長段階</button></li>
+        <li><button class="nav-btn" data-target="image-settings">画像設定</button></li>
+        <li><button class="nav-btn" data-target="statistics">統計</button></li>
+        <li><button class="nav-btn" data-target="other-settings">その他設定</button></li>
+        <li><button class="nav-btn" data-target="backup-restore">バックアップ/リストア</button></li>
+        <li><button class="nav-btn" data-target="history">履歴</button></li>
+      </ul>
+    </nav>
+    <main id="admin-content">
+      <!-- A-02: API URL設定 -->
+      <section id="basic-settings" class="content-section">
+        <h2>基本設定</h2>
+        <div>
+          <label for="api-url">API URL:</label>
+          <input type="text" id="api-url" placeholder="GAS WebアプリURL">
+          <button id="save-api-url-btn">保存</button>
+        </div>
+      </section>
+
+      <!-- A-04, A-05: 成長段階設定 -->
+      <section id="growth-settings" class="content-section" hidden>
+        <h2>成長段階設定</h2>
+        <div>
+          <label for="max-meetings">最大交流回数:</label>
+          <input type="number" id="max-meetings" min="0" value="100">
+          <button id="auto-distribute-btn">均等割り当て</button>
+          <button id="reset-stages-btn">初期値にリセット</button>
+        </div>
+        <div id="stages-container">
+          <table>
+            <thead>
+              <tr>
+                <th>段階</th>
+                <th>閾値</th>
+              </tr>
+            </thead>
+            <tbody id="stages-tbody">
+              <!-- JavaScriptで0～30の行を生成 -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- A-06, A-07, A-08: 画像設定 -->
+      <section id="image-settings" class="content-section" hidden>
+        <h2>画像設定</h2>
+        <div>
+          <label for="stage-selector">成長段階:</label>
+          <select id="stage-selector">
+            <!-- 0～30のオプションをJSで生成 -->
+          </select>
+        </div>
+        <div>
+          <label for="image-id-url-input">画像URL/ID:</label>
+          <input type="text" id="image-id-url-input" placeholder="画像のURLまたはGoogle DriveのファイルID">
+          <button id="set-id-url-btn">設定</button>
+        </div>
+        <div>
+          <label for="image-upload-input">画像アップロード:</label>
+          <input type="file" id="image-upload-input" accept="image/png, image/jpeg, image/gif">
+          <button id="upload-image-btn">アップロード</button>
+        </div>
+        <div id="image-grid">
+          <!-- 各段階のサムネイル表示 -->
+        </div>
+        <button id="clear-all-images-btn">全画像設定クリア</button>
+      </section>
+
+      <!-- A-19: 統計ダッシュボード -->
+      <section id="statistics" class="content-section" hidden>
+        <h2>統計</h2>
+        <div id="statistics-dashboard">
+          <!-- 統計内容 -->
+        </div>
+      </section>
+
+      <!-- A-17, A-18, A-16: その他設定 -->
+      <section id="other-settings" class="content-section" hidden>
+        <h2>その他設定</h2>
+        <div>
+          <label for="polling-interval">ポーリング間隔 (秒):</label>
+          <input type="number" id="polling-interval" min="15" max="300" value="30">
+        </div>
+        <div>
+          <label for="language-select">言語設定:</label>
+          <select id="language-select">
+            <option value="ja">日本語</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+        <div>
+          <label for="debug-mode">デバッグモード:</label>
+          <input type="checkbox" id="debug-mode">
+        </div>
+      </section>
+
+      <!-- A-20: 設定バックアップ/復元 -->
+      <section id="backup-restore" class="content-section" hidden>
+        <h2>設定バックアップ/復元</h2>
+        <button id="export-settings-btn">設定エクスポート</button>
+        <input type="file" id="import-settings-input" accept=".json">
+        <button id="import-settings-btn">設定インポート</button>
+      </section>
+
+      <!-- A-21: 設定履歴管理 -->
+      <section id="history" class="content-section" hidden>
+        <h2>設定履歴管理</h2>
+        <div id="history-list">
+          <!-- 履歴項目表示 -->
+        </div>
+        <button id="rollback-btn">ロールバック</button>
+      </section>
+
+      <!-- A-15: UIフィードバック -->
+      <div id="loader" hidden>
+        <div class="spinner"></div>
+        <span>処理中…</span>
+      </div>
+      <div id="success-message" hidden></div>
+      <div id="admin-error-message" hidden></div>
+      <button id="preview-btn">プレビュー</button>
+      <button id="home-btn">メイン画面へ戻る</button>
+      <div id="debug-info" hidden></div>
+      <div>
+        <button id="save-settings-btn">全設定保存</button>
+        <button id="save-stages-only-btn">段階設定のみ保存</button>
+        <button id="save-images-only-btn">画像設定のみ保存</button>
+      </div>
+    </main>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>
