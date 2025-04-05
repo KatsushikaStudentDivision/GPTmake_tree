@@ -3,6 +3,12 @@
   A-02～A-21 の各管理機能を実装。  
   バニラJavaScript (ES6+) で記述し、adminApp オブジェクトとして構成。
 */
+
+// localStorage に "treeAppApiUrl" が未設定の場合、テスト用ダミーURLをセットする
+if (!localStorage.getItem('treeAppApiUrl')) {
+  localStorage.setItem('treeAppApiUrl', 'https://script.google.com/macros/s/AKfycbxRpPzgPCSeSY4C5BNgbcrDyt7KTy-P0Q_1cVUyhoLw_cucnzrLopJfycTV8Y0MWNf7HA/exec');
+}
+
 const adminApp = {
   apiUrl: localStorage.getItem('treeAppApiUrl') || '',
   config: null,
