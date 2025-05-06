@@ -1,58 +1,22 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>みんなで育てる友情の木</title>
-  <link rel="stylesheet" href="main.css">
+  <title>シンプルスライドショー</title>
+  <link rel="stylesheet" href="./main.css">
 </head>
 <body>
-  <header>
-    <h1>みんなで育てる友情の木</h1>
-  </header>
-  <main>
-    <!-- F-01: データ表示（成長段階、累計交流回数、進捗、直近の進捗） -->
-    <section aria-labelledby="stage-heading">
-      <h2 id="stage-heading">成長段階</h2>
-      <div id="display">
-        <span id="stage-display" aria-live="polite">段階: 0</span>
-        <span id="total-value-display" aria-live="polite">交流回数: 0</span>
-      </div>
-      <div id="progress-container">
-        <label for="progress-bar">次の成長段階までの進捗</label>
-        <progress id="progress-bar" value="0" max="100"></progress>
-      </div>
-      <div id="recent-progress" aria-live="polite">直近の進捗: 0回</div>
-    </section>
-
-    <!-- F-02: 木の画像表示（背景環境の変化も含む） -->
-    <section id="tree-section" aria-label="友情の木">
-      <div id="tree-container">
-        <img class="tree-image" src="" alt="友情の木">
-      </div>
-    </section>
-
-    <!-- F-13: 利用統計表示（統計グラフ等） -->
-    <section id="statistics" aria-label="利用統計">
-      <h2>利用統計</h2>
-      <!-- 統計グラフ描画用（例：canvas要素） -->
-      <canvas id="statistics-chart"></canvas>
-    </section>
-  </main>
-
-  <!-- F-05: ローディング表示 -->
-  <div id="loading" class="loading" aria-live="assertive" hidden>
-    <div class="spinner"></div>
-    <span>読み込み中…</span>
+  <div class="slideshow-container">
+    <p id="status">データを読み込み中...</p>
+    <p>現在のスライド: <span id="current-slide">0</span></p>
+    <p>合計値: <span id="total-value">0</span></p>
+    <div class="controls">
+      <button id="prev-btn">◀ 前へ</button>
+      <button id="next-btn">次へ ▶</button>
+    </div>
+    <a class="admin-link" href="./admin.html">管理画面へ</a>
   </div>
-  <!-- F-06: エラー表示（エラー原因と対処法提示） -->
-  <div id="error-message" role="alert" hidden></div>
-
-  <footer>
-    <!-- F-09: 管理画面へのリンク -->
-    <a href="admin.html" class="admin-link">管理画面へ</a>
-  </footer>
-  <script src="main.js"></script>
+  <script defer src="./main.js"></script>
 </body>
 </html>
